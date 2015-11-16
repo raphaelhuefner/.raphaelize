@@ -12,11 +12,15 @@ DBNAME=$3
 
 tablespacename="ts_$DBNAME"
 
-already_exists="`mysql -h"$DBHOST" -u"$DBUSER" -p"$DBPASS" -e"SELECT TABLESPACE_NAME FROM INFORMATION_SCHEMA.TABLESPACES WHERE TABLESPACE_NAME LIKE '$tablespacename';" --skip-column-names`"
-if [ -z "$already_exists" ]; then
-  tablespacefilename="$tablespacename.ibd"
-  mysql -h"$DBHOST" -u"$DBUSER" -p"$DBPASS" -e"CREATE TABLESPACE $tablespacename ADD DATAFILE '$tablespacefilename' Engine=InnoDB;" 
-  echo "Created tablespace '$tablespacename' in file '$tablespacefilename'."
+datadir="`mysql -h"$DBHOST" -u"$DBUSER" -p"$DBPASS" -e"SELECT @@GLOBAL.datadir;" --silent --skip-column-names`"
+datadir=${datadir%/}
+tablespacefullfilename="$datadir/$tablespacename.ibd"
+
+if [ -f "$tablespacefullfilename" ]; then
+  echo "Found tablespace file '$tablespacefullfilename'."
+else
+  echo "Error: Could not find tablespace file '$tablespacefullfilename'. Aborting."
+  exit 1
 fi
 
 # Why use LC_ALL? ---> @see http://stackoverflow.com/questions/19242275/re-error-illegal-byte-sequence-on-mac-os-x
