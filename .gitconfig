@@ -1,0 +1,22 @@
+[user]
+  name = Raphael Huefner
+  email = raphael@affinitybridge.com
+[color]
+  ui = true
+[alias]
+  lol = log --graph --decorate --oneline
+  lola = log --graph --decorate --oneline --all
+  ciff = diff --word-diff=color
+  ;lila = log --graph --decorate --pretty=format:'%C(yellow)%h%Creset%d %an %C(yellow)%ad%Creset %s' --all
+  lila = log --graph --all --pretty=tformat:'%C(yellow)%h%Creset%C(red)%d%Creset %an %C(yellow)%ad%Creset %s' --date=local
+[merge]
+  conflictstyle = diff3
+[branch]
+;  autosetuprebase = always
+[core]
+  editor = /usr/bin/vim
+  excludesfile = ~/.gitglobalignore
+[rerere]
+  enabled = true
+[push]
+  default = simple
