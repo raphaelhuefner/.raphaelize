@@ -1,1 +1,4 @@
-/Applications/FirefoxDeveloperEdition.app/Contents/MacOS/firefox
+#!/bin/bash
+
+/Applications/FirefoxDeveloperEdition.app/Contents/MacOS/firefox "$@" &
+
