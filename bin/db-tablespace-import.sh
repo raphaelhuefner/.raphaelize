@@ -23,7 +23,7 @@ if [ $LAST_RETURN_VALUE -ne 0 ]; then
   exit 1
 fi
 
-tablespacename="ts_$DBNAME"
+tablespacename="`db-tablespace-get-name.sh $DBNAME`"
 
 # Why use LC_ALL? ---> @see http://stackoverflow.com/questions/19242275/re-error-illegal-byte-sequence-on-mac-os-x
 LC_ALL=C sed "s/ENGINE=InnoDB/TABLESPACE $tablespacename ENGINE=InnoDB/g" < /dev/stdin | mysql -h"$DBHOST" -u"$DBUSER" -p"$DBPASS" "$DBNAME"

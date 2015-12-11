@@ -23,7 +23,7 @@ if [ $LAST_RETURN_VALUE -ne 0 ]; then
   exit 1
 fi
 
-tablespacename="ts_$DBNAME"
+tablespacename="`db-tablespace-get-name.sh $DBNAME`"
 
 echo "Start converting DB '$DBNAME' into separate general tablespace '$tablespacename'."
 mysql --login-path=$DB_LOGIN_PATH_ADMIN -e"SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA LIKE '$DBNAME' AND ENGINE LIKE 'InnoDB';" --skip-column-names "$DBNAME" | while read tablename; do

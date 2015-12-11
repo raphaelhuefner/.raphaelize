@@ -16,7 +16,7 @@ fi
 
 DBNAME=$1
 
-tablespacename="ts_$DBNAME"
+tablespacename="`db-tablespace-get-name.sh $DBNAME`"
 
 echo "Ensure existance of a separate general tablespace '$tablespacename' for DB '$DBNAME'."
 
