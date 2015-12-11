@@ -1,27 +1,29 @@
 #!/bin/bash
 
-if [ -z "$3" ]; then
-  echo "Usage: $0 DBUSER DBPASS DBNAME"
+DB_LOGIN_PATH_NORMAL=dev
+
+db-login-path-exists.sh $DB_LOGIN_PATH_NORMAL
+LAST_RETURN_VALUE=$?
+if [ $LAST_RETURN_VALUE -ne 0 ]; then
+  echo "Error: There was a problem detecting the mysql login path named '$DB_LOGIN_PATH_NORMAL'."
+  exit 1
+fi
+
+if [ -z "$1" ]; then
+  echo "Usage: $0 DBNAME"
   exit
 fi
 
-DBHOST=localhost
-DBUSER=$1
-DBPASS=$2
-DBNAME=$3
+DBNAME=$1
 
-tablespacename="ts_$DBNAME"
-
-datadir="`mysql -h"$DBHOST" -u"$DBUSER" -p"$DBPASS" -e"SELECT @@GLOBAL.datadir;" --silent --skip-column-names`"
-datadir=${datadir%/}
-tablespacefullfilename="$datadir/$tablespacename.ibd"
-
-if [ -f "$tablespacefullfilename" ]; then
-  echo "Found tablespace file '$tablespacefullfilename'."
-else
-  echo "Error: Could not find tablespace file '$tablespacefullfilename'. Aborting."
+db-tablespace-create-if-not-exists.sh $DBNAME
+LAST_RETURN_VALUE=$?
+if [ $LAST_RETURN_VALUE -ne 0 ]; then
+  echo "Error: There was a problem ensuring the existance of a separate tablespace for DB '$DBNAME'."
   exit 1
 fi
+
+tablespacename="ts_$DBNAME"
 
 # Why use LC_ALL? ---> @see http://stackoverflow.com/questions/19242275/re-error-illegal-byte-sequence-on-mac-os-x
 LC_ALL=C sed "s/ENGINE=InnoDB/TABLESPACE $tablespacename ENGINE=InnoDB/g" < /dev/stdin | mysql -h"$DBHOST" -u"$DBUSER" -p"$DBPASS" "$DBNAME"
