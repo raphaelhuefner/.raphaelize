@@ -17,10 +17,12 @@ fi
 # create new symlink in /etc/apache2/sites-enabled/
 ln -s ../sites-available/$SITENAME.conf /etc/apache2/sites-enabled/$SITENAME.conf
 
+# DISABLED because this is now handled via dnsmasq
+# @see https://echo.co/blog/os-x-1010-yosemite-local-development-environment-apache-php-and-mysql-homebrew
 # append new local hostname in /etc/hosts
-if [ -z "`grep "$HOSTNAME" /etc/hosts`" ]; then
-  sed -i -e '/127\.0\.0\.1/s/$/ '"$HOSTNAME"'/' /etc/hosts
-fi
+# if [ -z "`grep "$HOSTNAME" /etc/hosts`" ]; then
+#   sed -i -e '/127\.0\.0\.1/s/$/ '"$HOSTNAME"'/' /etc/hosts
+# fi
 
 # some debug output
 /usr/sbin/apachectl -S
