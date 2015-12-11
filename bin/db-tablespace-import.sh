@@ -26,4 +26,4 @@ fi
 tablespacename="`db-tablespace-get-name.sh $DBNAME`"
 
 # Why use LC_ALL? ---> @see http://stackoverflow.com/questions/19242275/re-error-illegal-byte-sequence-on-mac-os-x
-LC_ALL=C sed "s/ENGINE=InnoDB/TABLESPACE $tablespacename ENGINE=InnoDB/g" < /dev/stdin | mysql -h"$DBHOST" -u"$DBUSER" -p"$DBPASS" "$DBNAME"
+LC_ALL=C sed "s/ENGINE=InnoDB/TABLESPACE $tablespacename ENGINE=InnoDB/g" < /dev/stdin | mysql --login-path=$DB_LOGIN_PATH_NORMAL "$DBNAME"

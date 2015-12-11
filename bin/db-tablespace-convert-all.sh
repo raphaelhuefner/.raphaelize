@@ -14,7 +14,6 @@ mysql --login-path=$DB_LOGIN_PATH_ADMIN -e"SHOW DATABASES;" --skip-column-names 
   LAST_RETURN_VALUE=$?
   if [ $LAST_RETURN_VALUE -eq 0 ]; then
     echo "Sucessfully converted DB '$dbname' into using a separate general tablespace."
-    exit 0
   else
     echo "Error: There was a problem converting DB '$dbname' into using a separate general tablespace."
     exit 1

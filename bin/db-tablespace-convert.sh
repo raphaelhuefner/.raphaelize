@@ -27,15 +27,21 @@ tablespacename="`db-tablespace-get-name.sh $DBNAME`"
 
 echo "Start converting DB '$DBNAME' into separate general tablespace '$tablespacename'."
 mysql --login-path=$DB_LOGIN_PATH_ADMIN -e"SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA LIKE '$DBNAME' AND ENGINE LIKE 'InnoDB';" --skip-column-names "$DBNAME" | while read tablename; do
-  echo "Convert table '$DBNAME.$tablename' into tablespace '$tablespacename'."
-  mysql --login-path=$DB_LOGIN_PATH_ADMIN -e"ALTER TABLE $DBNAME.$tablename TABLESPACE $tablespacename;" 
-  LAST_RETURN_VALUE=$?
-  if [ $LAST_RETURN_VALUE -eq 0 ]; then
-    echo "Converted table '$DBNAME.$tablename' into tablespace '$tablespacename'."
-    exit 0
+  echo -n "TABLE '$DBNAME.$tablename': "
+  backtick='`'
+  table_definition_with_tablespace="`mysql --login-path=$DB_LOGIN_PATH_ADMIN -e"SHOW CREATE TABLE $DBNAME.$tablename;" --silent --skip-column-names | grep -E "TABLESPACE $backtick$tablespacename$backtick"`"
+  if [ -n "$table_definition_with_tablespace" ]; then
+    echo "Already in tablespace '$tablespacename'."
   else
-    echo "Error: There was a problem converting table '$DBNAME.$tablename' into tablespace '$tablespacename'."
-    exit 1
+    echo -n "Converting into tablespace '$tablespacename'. "
+    mysql --login-path=$DB_LOGIN_PATH_ADMIN -e"ALTER TABLE $DBNAME.$tablename TABLESPACE $tablespacename;" 
+    LAST_RETURN_VALUE=$?
+    if [ $LAST_RETURN_VALUE -eq 0 ]; then
+      echo "Done."
+    else
+      echo "Error: There was a problem converting table '$DBNAME.$tablename' into tablespace '$tablespacename'."
+      exit 1
+    fi
   fi
 done
 echo "Done converting DB '$DBNAME' into separate general tablespace '$tablespacename'."
