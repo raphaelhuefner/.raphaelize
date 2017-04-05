@@ -1,0 +1,9 @@
+*.engine   diff=php
+*.inc      diff=php
+*.install  diff=php
+*.module   diff=php
+*.php      diff=php
+*.profile  diff=php
+*.test     diff=php
+*.theme    diff=php
+

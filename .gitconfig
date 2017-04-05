@@ -17,6 +17,8 @@
 [core]
   editor = /usr/bin/vim
   excludesfile = ~/.gitglobalignore
+; @see https://drunkenmonkey.at/blog/diffs_with_proper_function_context  
+  attributesFile = ~/.gitglobalattributes
 [rerere]
   enabled = true
 [push]
