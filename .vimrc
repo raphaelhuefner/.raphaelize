@@ -12,7 +12,7 @@ try
 catch
 endtry
 
-set history=70000
+set history=10000
 set visualbell
 set expandtab
 set tabstop=2
