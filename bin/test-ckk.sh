@@ -5,13 +5,14 @@ SOLR_PORT="8983"
 SOLR_CORE=""
 SOLR_PATH="/solr"
 SOLR_ROOT_DIR="/Applications/solr-4.7.0"
-SOLR_INSTANCE_DIR="/ckk_fortmckay"
+SOLR_INSTANCE_DIR="/ckk_fmfn468"
 SOLR_LOG_FILE=~/ckk_solr.log
 
 SELENIUM_HOST="127.0.0.1"
 SELENIUM_PORT="4444"
 SELENIUM_ROOT_DIR="/Applications"
-SELENIUM_VERSION="2.48.2"
+#SELENIUM_VERSION="2.48.2"
+SELENIUM_VERSION="3.4.0"
 SELENIUM_LOG_FILE=~/ckk_selenium.log
 
 function isSolrRunning() {
