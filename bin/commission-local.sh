@@ -19,5 +19,6 @@ ln -s "$PROJECTDIR" ~/Sites/"$SITENAME"/documentroot
 echo "Please enter your password to change the Apache config."
 sudo ~/bin/commission-local.sh-sudo.sh "$SITENAME"
 
-open http://$SITENAME.dev/
+#open http://$SITENAME.dev/
+open http://$SITENAME.rh/
 

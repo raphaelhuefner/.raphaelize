@@ -3,8 +3,8 @@
 # first argument is the machine name of the local website about to be commissioned
 SITENAME=$1
 
-# use ".dev" top level domain for local dev sites
-HOSTNAME=$SITENAME.dev
+# use ".rh" top level domain for local dev sites
+HOSTNAME=$SITENAME.rh
 
 # create Apache config file in /etc/apache2/sites-available/
 sed 's/###SITENAME###/'$SITENAME'/g' < /etc/apache2/sites-available/_template.conf > /etc/apache2/sites-available/$SITENAME.conf
