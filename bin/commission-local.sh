@@ -16,9 +16,21 @@ if [ -h ~/Sites/"$SITENAME"/documentroot ]; then
 fi
 ln -s "$PROJECTDIR" ~/Sites/"$SITENAME"/documentroot
 
-echo "Please enter your password to change the Apache config."
-sudo ~/bin/commission-local.sh-sudo.sh "$SITENAME"
+# use ".rh" top level domain for local dev sites
+HOSTNAME=$SITENAME.rh
 
-#open http://$SITENAME.dev/
-open http://$SITENAME.rh/
+# create Apache vhost config file in /usr/local/etc/httpd/vhosts/
+sed 's/###SITENAME###/'$SITENAME'/g' < /usr/local/etc/httpd/vhosts/_conf.template > /usr/local/etc/httpd/vhosts/$SITENAME.conf
+
+# some debug output
+/usr/local/bin/apachectl -S
+
+# notify Apache of new config
+echo "Please enter your password to change the Apache config."
+sudo brew services restart httpd
+
+# some user feedback
+echo "Local vhost $HOSTNAME commissioned. Test at: http://$HOSTNAME/"
+
+open http://$HOSTNAME/
 
