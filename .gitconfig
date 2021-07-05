@@ -1,15 +1,16 @@
 [user]
   name = Raphael Huefner
   email = raphaelhuefner@gmail.com
+;  append "!" to LONG keyid to force GPG to use a specific subkey
+;  signingkey = 0123456789ABCDEF!
 [color]
   ui = true
 [alias]
-  lol = log --graph --decorate --oneline
   lola = log --graph --decorate --oneline --all
   ciff = diff --word-diff=color --word-diff-regex='[0-9a-zA-Z_]+'
   yes = add
   no = checkout --
-  lila = log --graph --all --pretty=tformat:'%C(yellow)%h %ai%Creset %C(red)%d%Creset %C(green)%an%Creset %s' --date=local
+  nono = reset HEAD
 [merge]
   conflictstyle = diff3
 [branch]
@@ -17,9 +18,18 @@
 [core]
   editor = /usr/bin/vim
   excludesfile = ~/.gitglobalignore
-; @see https://drunkenmonkey.at/blog/diffs_with_proper_function_context  
+  ; @see https://drunkenmonkey.at/blog/diffs_with_proper_function_context
   attributesFile = ~/.gitglobalattributes
+[init]
+  defaultBranch = main
 [rerere]
   enabled = true
+  autoupdate = true
 [push]
   default = simple
+[status]
+  submoduleSummary = true
+[commit]
+;  gpgSign = true
+[url "ssh://git@github.com/"]
+  insteadOf = https://github.com/

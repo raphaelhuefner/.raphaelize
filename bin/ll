@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+FORTY_NEWLINES="\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+echo -e "$FORTY_NEWLINES$FORTY_NEWLINES$FORTY_NEWLINES$FORTY_NEWLINES$FORTY_NEWLINES"
+#tput clear
