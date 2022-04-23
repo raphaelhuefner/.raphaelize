@@ -43,7 +43,7 @@ class RhFilter:
 
     def outputBuffer(self):
         for line in self.buffer:
-            print line,    
+            print(line)
 
     def isFirstLogLine(self, line):
         return None != self.firstLogLineRegexp.search(line)        

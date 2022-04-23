@@ -11,3 +11,4 @@ alias utc="date -u +%FT%TZ"
 
 
 alias gsu="git submodule update --init --recursive"
+alias gf="git fetch --all"
