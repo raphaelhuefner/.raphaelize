@@ -1,12 +1,24 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-ln -s ~/.raphaelize/.gitconfig ~/.gitconfig
-ln -s ~/.raphaelize/.gitglobalattributes ~/.gitglobalattributes
+# Make Bash's error handling strict(er).
+set -o nounset -o pipefail -o errexit
 
-ln -s ~/.raphaelize/.bash_aliases ~/.bash_aliases
-# ln -s ~/.raphaelize/.bashrc ~/.bashrc
-
-ln -s ~/.raphaelize/.vim ~/.vim
-ln -s ~/.raphaelize/.vimrc ~/.vimrc
-
-ln -s ~/.raphaelize/bin ~/bin
+while read cfg_item; do
+  source=~/.raphaelize/$cfg_item
+  target=~/$cfg_item
+  if ! [ -a "$target" ]; then
+    ln -s $source $target
+  else
+    if ! [ -h "$target" ]; then
+      echo "Can not .raphaelize $target since it already exists"
+    fi
+  fi
+done << EOF
+.gitconfig
+.gitglobalattributes
+.gitglobalignore
+.bash_aliases
+.vim
+.vimrc
+bin
+EOF

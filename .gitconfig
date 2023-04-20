@@ -7,7 +7,8 @@
   ui = true
 [alias]
   lola = log --graph --decorate --oneline --all
-  ciff = diff --word-diff=color --word-diff-regex='[0-9a-zA-Z_]+'
+  ciff  = diff --word-diff=color --word-diff-regex='[0-9a-zA-Z_]+'
+  wdiff = diff --word-diff=color --word-diff-regex='[0-9a-zA-Z_]+'
   yes = add
   no = checkout --
   nono = reset HEAD
@@ -31,7 +32,10 @@
   submoduleSummary = true
 [commit]
 ;  gpgSign = true
+  gpgSign = false
 [url "ssh://git@github.com/"]
   insteadOf = https://github.com/
 [pull]
-	ff = only
+  ff = only
+;[includeIf "gitdir:~/projects/personal/"]
+;  path = ~/.gitconfig-personal

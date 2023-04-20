@@ -1,0 +1,51 @@
+
+export HISTSIZE=100000
+export HISTFILESIZE=2000000
+export HISTCONTROL=ignoreboth
+export HISTTIMEFORMAT="%FT%T"
+export CLICOLOR=1
+export LSCOLORS=ExFxCxDxBxegedabagacad
+
+# See also ~/bin/gcswitch.sh
+export GOOGLE_APPLICATION_CREDENTIALS=~/.config/gcloud/dynamic_default_credentials.json
+
+venv() {
+  if [ ! -f ./bin/activate ]; then
+    python3 -m venv .
+    . ./bin/activate
+    pip install --upgrade pip
+  fi
+  . ./bin/activate
+}
+
+mgrep() {
+  WHAT=$1
+  WHERE=$2
+  ~/bin/ll;
+  echo "grep -RHinE $WHAT $WHERE | grep -v Binary | sort -t: -k1,1d -k2,2g"
+}
+
+# Keep this towards the end of .bash_profile
+# @see https://github.com/pyenv/pyenv#homebrew-on-macos
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
+fi
+
+# @see https://help.github.com/articles/telling-git-about-your-signing-key/
+export GPG_TTY=$(tty)
+
+# See https://docs.docker.com/engine/security/rootless/
+# Recommended by `dockerd-rootless-setuptool.sh install`
+# Turns out that /usr/bin is already in the PATH, so I disabled it.
+#export PATH=/usr/bin:$PATH
+export DOCKER_HOST=unix:///run/user/$(id -u)/docker.sock
+
+# # doesn't work in Makefile, will take the whole var value as command, including the space
+#export DOCKER_COMPOSE="docker compose"
+
+if [ -a "$HOME/.nvm" ]; then
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+fi
