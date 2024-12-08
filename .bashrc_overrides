@@ -39,7 +39,7 @@ export GPG_TTY=$(tty)
 # Recommended by `dockerd-rootless-setuptool.sh install`
 # Turns out that /usr/bin is already in the PATH, so I disabled it.
 #export PATH=/usr/bin:$PATH
-export DOCKER_HOST=unix:///run/user/$(id -u)/docker.sock
+export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 
 # # doesn't work in Makefile, will take the whole var value as command, including the space
 #export DOCKER_COMPOSE="docker compose"
