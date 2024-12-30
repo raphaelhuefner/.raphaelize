@@ -42,13 +42,16 @@
   insteadOf = https://github.com/
 [pull]
   ff = only
-[includeIf "gitdir:~/projects/"]
-  path = ~/.gitconfig-professional
-[includeIf "gitdir:~/projects/personal/"]
-  path = ~/.gitconfig-personal
 [filter "lfs"]
   clean = git-lfs clean -- %f
   smudge = git-lfs smudge -- %f
   process = git-lfs filter-process
   required = true
+
+; KEEP THESE AT THE END OF THE FILE
+; ... so that they have an actual chance to overwrite the "default" values above.
+[includeIf "gitdir:~/projects/**/"]
+  path = ~/.gitconfig-professional
+[includeIf "gitdir:~/projects/personal/**/"]
+  path = ~/.gitconfig-personal
 
