@@ -1,7 +1,7 @@
 
 export HISTSIZE=100000
 export HISTFILESIZE=2000000
-export HISTCONTROL=ignoreboth
+export HISTCONTROL=ignoreboth:erasedups
 export HISTTIMEFORMAT="%FT%T"
 export CLICOLOR=1
 export LSCOLORS=ExFxCxDxBxegedabagacad
