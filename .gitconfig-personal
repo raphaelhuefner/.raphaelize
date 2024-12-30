@@ -1,0 +1,5 @@
+[user]
+	name = Raphael Huefner
+	email = raphaelhuefner@gmail.com
+[commit]
+	gpgSign = false

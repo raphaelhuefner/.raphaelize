@@ -15,6 +15,7 @@ while read cfg_item; do
   fi
 done << EOF
 .gitconfig
+.gitconfig-personal
 .gitglobalattributes
 .gitglobalignore
 .bash_aliases
@@ -22,3 +23,7 @@ done << EOF
 .vimrc
 bin
 EOF
+
+if ! [ -a "~/.gitconfig-professional" ]; then
+  touch ~/.gitconfig-professional
+fi

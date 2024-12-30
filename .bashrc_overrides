@@ -18,13 +18,6 @@ venv() {
   . ./bin/activate
 }
 
-mgrep() {
-  WHAT=$1
-  WHERE=$2
-  ~/bin/ll;
-  echo "grep -RHinE $WHAT $WHERE | grep -v Binary | sort -t: -k1,1d -k2,2g"
-}
-
 # Keep this towards the end of .bash_profile
 # @see https://github.com/pyenv/pyenv#homebrew-on-macos
 if command -v pyenv 1>/dev/null 2>&1; then
@@ -35,14 +28,16 @@ fi
 # @see https://help.github.com/articles/telling-git-about-your-signing-key/
 export GPG_TTY=$(tty)
 
-# See https://docs.docker.com/engine/security/rootless/
-# Recommended by `dockerd-rootless-setuptool.sh install`
-# Turns out that /usr/bin is already in the PATH, so I disabled it.
-#export PATH=/usr/bin:$PATH
-export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
+if [ -n "$XDG_RUNTIME_DIR" ]; then
+  # See https://docs.docker.com/engine/security/rootless/
+  # Recommended by `dockerd-rootless-setuptool.sh install`
+  # Turns out that /usr/bin is already in the PATH, so I disabled it.
+  #export PATH=/usr/bin:$PATH
+  export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 
-# # doesn't work in Makefile, will take the whole var value as command, including the space
-#export DOCKER_COMPOSE="docker compose"
+  # # doesn't work in Makefile, will take the whole var value as command, including the space
+  #export DOCKER_COMPOSE="docker compose"
+fi
 
 if [ -a "$HOME/.nvm" ]; then
   export NVM_DIR="$HOME/.nvm"

@@ -8,7 +8,9 @@
 [alias]
   lola = log --graph --decorate --oneline --all
   ciff  = diff --word-diff=color --word-diff-regex='[0-9a-zA-Z_]+'
-  wdiff = diff --word-diff=color --word-diff-regex='[0-9a-zA-Z_]+'
+; wdiff = diff --word-diff=color --word-diff-regex='[0-9a-zA-Z_]+'
+; wdiff = diff --word-diff=color --word-diff-regex='([0-9a-zA-Z_]|[^[:space:]])+'
+  wdiff = diff --word-diff=color --word-diff-regex=.
   yes = add
   no = checkout --
   nono = reset HEAD
@@ -37,5 +39,14 @@
   insteadOf = https://github.com/
 [pull]
   ff = only
-;[includeIf "gitdir:~/projects/personal/"]
-;  path = ~/.gitconfig-personal
+[includeIf "gitdir:~/projects/"]
+  path = ~/.gitconfig-professional
+[includeIf "gitdir:~/projects/personal/"]
+  path = ~/.gitconfig-personal
+[filter "lfs"]
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
+[tag]
+  gpgSign = true
