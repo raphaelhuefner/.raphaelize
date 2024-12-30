@@ -50,7 +50,7 @@
 
 ; KEEP THESE AT THE END OF THE FILE
 ; ... so that they have an actual chance to overwrite the "default" values above.
-[includeIf "gitdir:~/projects/**/"]
+[includeIf "gitdir:~/**/"]
   path = ~/.gitconfig-professional
 [includeIf "gitdir:~/projects/personal/**/"]
   path = ~/.gitconfig-personal
