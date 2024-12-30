@@ -35,6 +35,9 @@
 [commit]
 ;  gpgSign = true
   gpgSign = false
+[tag]
+;  gpgSign = true
+  gpgSign = false
 [url "ssh://git@github.com/"]
   insteadOf = https://github.com/
 [pull]
@@ -48,5 +51,4 @@
   smudge = git-lfs smudge -- %f
   process = git-lfs filter-process
   required = true
-[tag]
-  gpgSign = true
+
