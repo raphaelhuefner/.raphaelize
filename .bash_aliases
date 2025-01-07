@@ -20,8 +20,9 @@ case "$OS" in
 esac
 
 if command -v docker 1>/dev/null 2>&1; then
-  alias docker-clean-all="docker container rm \`docker container ls -aq\`"
-  alias docker-clean-exited="docker container rm \`docker container ls --filter status=exited -q\`"
+  alias docker-clean-all="docker system prune -a"
+  alias docker-clean-all-containers="docker container rm \`docker container ls -aq\`"
+  alias docker-clean-exited-containers="docker container rm \`docker container ls --filter status=exited -q\`"
 fi
 
 if command -v gpg 1>/dev/null 2>&1; then
