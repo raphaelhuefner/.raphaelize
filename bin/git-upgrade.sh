@@ -5,7 +5,11 @@ current_branch="`git symbolic-ref --short --quiet HEAD`"
 
 if [ -n "$current_changes" ]; then
   git status
-  echo "ERROR: Working tree or index have uncommitted changes. Will not upgrade any git branches from remote."
+  RED_BACKGROUND='\033[30;41m'
+  NO_COLOR='\033[0m'
+  echo -e "${RED_BACKGROUND}ERROR:"            "Working tree or index have uncommitted changes. Will not upgrade any git branches from remote.${NO_COLOR}"
+  echo -e "${RED_BACKGROUND}ERROR:${NO_COLOR}" "Working tree or index have uncommitted changes. Will not upgrade any git branches from remote."
+  echo -e "${RED_BACKGROUND}ERROR:"            "Working tree or index have uncommitted changes. Will not upgrade any git branches from remote.${NO_COLOR}"
   exit
 fi
 
