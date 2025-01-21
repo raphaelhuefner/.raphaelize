@@ -19,10 +19,16 @@ git fetch --all --tags --prune
 while read branch; do
   upstream=$(git rev-parse --abbrev-ref $branch@{upstream} 2>/dev/null)
   if [[ $? == 0 ]]; then
-    if [[ "$branch" == "$current_branch" ]]; then
-      git reset --hard "$upstream"
-    else
-      git branch -f "$branch" "$upstream"
+    # Only update local branch if upstream is ahead of local branch, not the
+    # other way around.
+    # See https://stackoverflow.com/a/13526591
+    git merge-base --is-ancestor $branch $upstream
+    if [[ $? == 0 ]]; then
+      if [[ "$branch" == "$current_branch" ]]; then
+        git reset --hard "$upstream"
+      else
+        git branch -f "$branch" "$upstream"
+      fi
     fi
   fi
 done < <(git for-each-ref --format='%(refname:short)' refs/heads/*)
