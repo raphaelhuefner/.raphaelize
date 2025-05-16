@@ -23,6 +23,7 @@ if command -v docker 1>/dev/null 2>&1; then
   alias docker-clean-all="docker system prune -a"
   alias docker-clean-all-containers="docker container rm \`docker container ls -aq\`"
   alias docker-clean-exited-containers="docker container rm \`docker container ls --filter status=exited -q\`"
+  alias docker-nuke="docker system prune --all --volumes --force"
 fi
 
 if command -v gpg 1>/dev/null 2>&1; then
@@ -45,7 +46,7 @@ if command -v git 1>/dev/null 2>&1; then
   alias gf="git fetch --all --tags --prune"
   alias gfm="git fetch --all --tags --prune; git branch -f main origin/main"
   alias gsu="git submodule update --init --recursive"
-  alias gco="git checkout -b $1 origin/$1"
+  alias gco='git checkout -b $1 origin/$1'
 fi
 
 if command -v pass 1>/dev/null 2>&1; then
