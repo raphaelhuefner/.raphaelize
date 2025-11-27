@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # get command line parameter
 NEW_BRANCH_NAME=$1

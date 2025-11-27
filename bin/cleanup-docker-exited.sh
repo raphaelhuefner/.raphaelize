@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # for filter types, @see https://docs.docker.com/engine/reference/commandline/ps/#filtering
 

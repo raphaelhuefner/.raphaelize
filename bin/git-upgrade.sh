@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 current_changes="`git status --short --porcelain`"
 current_branch="`git symbolic-ref --short --quiet HEAD`"

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 CURRENT_BRANCH=`git rev-parse --abbrev-ref HEAD`
 git push -u origin $CURRENT_BRANCH

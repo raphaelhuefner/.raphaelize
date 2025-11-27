@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 NEW_VERSION=`php -R'list($name,$version)=explode("=", $argn); $parts=explode(".", $version); $parts[1]++; echo implode(".", $parts);' < git-flow-version`
 
