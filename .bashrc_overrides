@@ -18,12 +18,16 @@ venv() {
   . ./bin/activate
 }
 
-# Keep this towards the end of .bash_profile
-# @see https://github.com/pyenv/pyenv#homebrew-on-macos
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-  eval "$(pyenv virtualenv-init -)"
-fi
+# Load pyenv automatically by appending the following to
+# ~/.bash_profile if it exists, otherwise ~/.profile (for login shells)
+# and ~/.bashrc (for interactive shells) :
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - bash)"
+
+# Load pyenv-virtualenv automatically by adding
+# the following to ~/.bashrc:
+eval "$(pyenv virtualenv-init -)"
 
 # @see https://help.github.com/articles/telling-git-about-your-signing-key/
 export GPG_TTY=$(tty)
