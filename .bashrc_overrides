@@ -18,16 +18,12 @@ venv() {
   . ./bin/activate
 }
 
-# Load pyenv automatically by appending the following to
-# ~/.bash_profile if it exists, otherwise ~/.profile (for login shells)
-# and ~/.bashrc (for interactive shells) :
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init - bash)"
-
-# Load pyenv-virtualenv automatically by adding
-# the following to ~/.bashrc:
-eval "$(pyenv virtualenv-init -)"
+if command -v pyenv 1>/dev/null 2>&1; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init - bash)"
+  eval "$(pyenv virtualenv-init -)"
+fi
 
 # @see https://help.github.com/articles/telling-git-about-your-signing-key/
 export GPG_TTY=$(tty)
@@ -49,5 +45,11 @@ if [ -a "$HOME/.nvm" ]; then
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 fi
 
-# Always prefer personal binaries
-export PATH=~/bin:$PATH
+if [ -a "$HOME/go/bin" ]; then
+  export PATH=$HOME/go/bin:$PATH
+fi
+
+# Always prefer personal binaries, so keep this at the end of the file.
+if [ -a "$HOME/bin" ]; then
+  export PATH=$HOME/bin:$PATH
+fi
