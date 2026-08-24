@@ -6,8 +6,6 @@ case "$OS" in
     alias utc="date -u +%FT%TZ"
     alias uuid="uuidgen | tr [:upper:] [:lower:]"
 
-    alias pr="httpsignature-proxy start --verbose-mode --listen --show-webhook-headers --ui"
-
     ;;
   Linux)
     alias utc="date --utc +%FT%TZ"
@@ -55,7 +53,6 @@ if command -v pass 1>/dev/null 2>&1; then
 fi
 
 alias mgrep="lll; grep -RHinE $1 $2 | grep -v Binary | sort -t: -k1,1d -k2,2g"
-alias rnd="python3 -c 'import random, string, sys; print(\"\".join(random.choices(string.digits + string.ascii_letters, k=int(sys.argv[1]) if len(sys.argv) > 1 else 256)))'"
 
 # Sneak my custom .bashrc cfg in here rather than having to figure out a way to (idempotently) add a `source ~/.raphaelize/.bashrc` to ~/.bashrc
 if [ -f ~/.raphaelize/.bashrc_overrides ]; then

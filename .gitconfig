@@ -47,6 +47,10 @@
   smudge = git-lfs smudge -- %f
   process = git-lfs filter-process
   required = true
+[filter "sq-encrypt-sin-infra"]
+    clean = sq encrypt --for-email=tech+infra@strengthinnumbers.business
+    smudge = sq decrypt
+    required = true
 
 ; KEEP THESE AT THE END OF THE FILE
 ; ... so that they have an actual chance to overwrite the "default" values above.
