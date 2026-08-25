@@ -48,7 +48,7 @@
   process = git-lfs filter-process
   required = true
 [filter "sq-encrypt-sin-infra"]
-    clean = sq encrypt --for-email=tech+infra@strengthinnumbers.business
+    clean = sq encrypt --for-email='tech+infra@strengthinnumbers.business' --without-signature
     smudge = sq decrypt
     required = true
 
