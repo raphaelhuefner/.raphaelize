@@ -13,7 +13,7 @@ from sys import argv
 def main() -> None:
     length = int(argv[1]) if len(argv)==2 else 256
     abc = digits + ascii_letters
-    print("".join(choice(abc) for _ in range(length)))
+    print("".join(choice(abc) for _ in range(length)), end='')
 
 
 if __name__ == "__main__":

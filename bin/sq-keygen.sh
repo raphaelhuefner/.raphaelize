@@ -36,7 +36,7 @@ if [ "false" != "${FILES_EXIST}" ]; then
     exit 1
 fi
 
-rnd.py > ${PASSWORD_FILE}
+rnd.py 127 > ${PASSWORD_FILE}
 
 sq key generate \
     --can-authenticate \
