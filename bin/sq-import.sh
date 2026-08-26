@@ -18,8 +18,12 @@ sq pki link authorize --unconstrained --all --cert="${FINGERPRINT}"
 # # To delete secret keys from the keystore:
 # sq key delete
 
-# # The sq keystore stores secrets here:
-# cd ~/Library/Application\ Support/pgp.cert.d
-
-# # To delete public keys from the keystore:
+# # Secret keys in the keystore are held here:
 # cd ~/Library/Application\ Support/org.Sequoia-PGP.sequoia/keystore/
+
+# # The sq keystore stores public keys (certs) here:
+# cd ~/Library/Application\ Support/pgp.cert.d
+# To delete public keys, use the `sqlite3` tool with the indexes
+
+# # Double-check those all those paths with this:
+# sq config inspect paths
